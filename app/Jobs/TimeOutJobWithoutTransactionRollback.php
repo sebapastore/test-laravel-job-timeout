@@ -16,9 +16,6 @@ class TimeOutJobWithoutTransactionRollback implements ShouldQueue
     public int $tries = 1;
     public int $timeout = 2;
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         DB::transaction(fn() => sleep(999));

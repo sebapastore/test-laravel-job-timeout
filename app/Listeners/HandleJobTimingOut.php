@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Jobs\TimeOutJobWithTransactionRollback;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class HandleJobTimingOut
 {
@@ -21,10 +20,7 @@ class HandleJobTimingOut
      */
     public function handle(object $event): void
     {
-        Log::info("handle job timing out");
-
         if ($event->job->resolveName() === TimeOutJobWithTransactionRollback::class) {
-            Log::info('TimeOutJobWithTransactionRollback');
             DB::rollBack();
         }
     }
